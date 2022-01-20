@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+  - name: install apache
+    apt:
+      name: apache2
+      state: absent
+    register: out
+
+  - name: msg
+    debug:
+      msg: "Hello"
+    when: out.changed == True
