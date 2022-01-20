@@ -1,0 +1,27 @@
+---
+- hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+  - name: download nexus package
+    get_url:
+      url: https://download.sonatype.com/nexus/oss/nexus-2.14.21-02-bundle.tar.gz
+      dest: /home/ram
+      mode: '0777'
+
+  - name: extract tar file
+    unarchive:
+      src: /home/ram/nexus-2.14.21-02-bundle.tar.gz
+      dest: /home/ram
+      remote_src: yes
+
+  - name: copy nexus.service
+    copy:
+      src: nexus.service
+      dest: /etc/systemd/system/nexus.service
+
+  - name: start nexus
+    systemd:
+      name: nexus
+      state: restarted
+      daemon_reload: yes

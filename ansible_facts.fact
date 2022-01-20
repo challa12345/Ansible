@@ -1,0 +1,7 @@
+#!/bin/bash
+git_var=$(git --version | awk '{print $3}'
+
+cat << EOF
+{ "Git_version" : "$(git_var)"
+}
+EOF

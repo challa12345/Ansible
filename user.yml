@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: create sathish user
+    user:
+      name: '{{ item.name }}'
+      uid: '{{ item.uid }}'
+      state: present
+    
+    loop:
+      - { name: sathish, uid: 1111 }
+      - { name: sandeep, uid: 2222 }
+      - { name: xyz, uid: 3333 }
+        

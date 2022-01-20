@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install apache
+    apt: 
+      name: apache2
+      state: present
+    when: ansible_os_family == "Centos"

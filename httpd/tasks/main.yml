@@ -1,0 +1,19 @@
+---
+  - name: install apache
+    apt:
+      name: apache2
+      state: present
+
+  - name: copy index.html
+    template:
+      src: index.html
+      dest: /var/www/html/index.html
+
+  - name: copy ram file
+    file:
+      dest: /var/www/html/ram.html
+
+  - debug:
+      msg:
+      - " n value is : {{n}} and type: {{n|type_debug}}"
+      - " my name is: {{my_name}} and type: {{my_name|type_debug}}"

@@ -1,0 +1,28 @@
+---
+ - name: Handlers Example
+   hosts: webserver
+   gather_facts: false
+   become: true
+   tasks:
+     - name: Sleep for 2 seconds
+       command: sleep 2
+       notify: run_handler
+     - name: copy ram
+       copy:
+         src: hello.html
+         dest: /var/www/html/
+       notify: run_handler
+
+
+     - name: Sleep for 5 seconds
+       command: sleep 5
+       notify: run_handler
+
+
+     - name: Sleep for 7 seconds
+       command: sleep 7
+       notify: run_handler
+
+   handlers:
+     - name: run_handler
+       command: sudo service apache2 restart

@@ -1,0 +1,28 @@
+---
+- hosts: all
+  name: Install
+  become: yes
+  tasks:
+  - name: Install Apache2 on  Ubuntu server
+    apt:
+      name: apache2
+      state: present
+      update_cache: yes
+    notify:
+    - Restart apache2
+  - name: flush_handler
+    meta: flush_handlers
+
+  - name: Allow HTTP traffic on UFW firewall
+    ufw:
+      rule: allow
+      port: http
+      proto: tcp
+    notify:
+    - Restart apache2
+
+  handlers:
+  - name: Restart apache2
+    service:
+      name:  apache2
+      state: restarted

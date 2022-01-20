@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: false
+  become: yes
+  vars:
+    n: 35.11
+    my_num: 11111
+    my_name: Ramakrishna
+
+  tasks:
+  - debug:
+      msg:
+      - " n value is : {{n}} and type: {{n|type_debug}}"
+      - " my name is: {{my_name}} and type: {{my_name|type_debug}}"

@@ -1,0 +1,12 @@
+[Unit]
+Description=nexus service
+After=network.target
+[Service]
+Type=forking
+LimitNOFILE=65536
+ExecStart=/home/ram/nexus-2.14.21-02/bin/nexus start
+ExecStop=/home/ram/nexus-2.14.21-02/bin/nexus stop
+User=ram
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
